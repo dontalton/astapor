@@ -1,6 +1,7 @@
 class quickstack::amqp::server (
   $amqp_provider                 = $quickstack::params::amqp_provider,
   $amqp_host                     = $quickstack::params::amqp_host,
+  $amqp_hosts                    = $quickstack::params::amqp_hosts,
   $amqp_port                     = $quickstack::params::amqp_port,
   $amqp_username                 = $quickstack::params::amqp_username,
   $amqp_password                 = $quickstack::params::amqp_password,
@@ -19,7 +20,12 @@ class quickstack::amqp::server (
 
   class { "quickstack::amqp::server::${klass}":
     amqp_provider => $amqp_provider,
-    amqp_host     => $amqp_host,
+    if aqmp_hosts {
+      amqp_host   => undef,
+      amqp_hosts  => $amqp_hosts
+    } else {
+      amqp_host     => $amqp_host,
+    }
     amqp_port     => $amqp_port,
     amqp_username => $amqp_username,
     amqp_password => $amqp_password,

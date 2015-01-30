@@ -35,6 +35,7 @@ class quickstack::glance (
   $manage_service           = true,
   $filesystem_store_datadir = '/var/lib/glance/images/',
   $amqp_host                = '127.0.0.1',
+  $amqp_hosts               = undef,
   $amqp_port                = '5672',
   $amqp_username            = '',
   $amqp_password            = '',
@@ -119,7 +120,12 @@ class quickstack::glance (
     class { 'glance::notify::rabbitmq':
       rabbit_password => $amqp_password,
       rabbit_userid   => $amqp_username,
-      rabbit_host     => $amqp_host,
+      if $amqp_hosts {
+        rabbit_host   => undef,
+        rabbit_hosts  => $amqp_hosts,
+      } else {
+        rabbit_host   => $amqp_host,
+      }
       rabbit_port     => $amqp_port,
       rabbit_use_ssl  => $rabbit_use_ssl,
     }

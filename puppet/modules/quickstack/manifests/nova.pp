@@ -131,6 +131,7 @@ class quickstack::nova (
   $memcached_servers            = 'false',
   $multi_host                   = 'true',
   $neutron                      = 'false',
+  $rabbit_hosts                 = undef,
   $neutron_metadata_proxy_secret,
   $qpid_heartbeat               = '60',
   $rpc_backend                  = 'nova.openstack.common.rpc.impl_kombu',
@@ -157,6 +158,7 @@ class quickstack::nova (
       qpid_password      => $amqp_password,
       rabbit_port        => $amqp_port,
       rabbit_host        => $amqp_hostname,
+      rabbit_hosts       => $rabbit_hosts,
       rabbit_userid      => $amqp_username,
       rabbit_password    => $amqp_password,
     }

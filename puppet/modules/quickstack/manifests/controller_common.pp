@@ -97,6 +97,7 @@ class quickstack::controller_common (
   $swift_storage_device          = 'device1',
   $amqp_provider                 = $quickstack::params::amqp_provider,
   $amqp_host                     = $quickstack::params::amqp_host,
+  $amqp_hosts                    = $quickstack::params::amqp_hosts,
   $amqp_username                 = $quickstack::params::amqp_username,
   $amqp_password                 = $quickstack::params::amqp_password,
   $verbose                       = $quickstack::params::verbose,
@@ -197,6 +198,7 @@ class quickstack::controller_common (
   class {'quickstack::amqp::server':
     amqp_provider => $amqp_provider,
     amqp_host     => $amqp_host,
+    amqp_hosts    => $amqp_hosts,
     amqp_port     => $amqp_port,
     amqp_username => $amqp_username,
     amqp_password => $amqp_password,
@@ -263,6 +265,7 @@ class quickstack::controller_common (
     rbd_store_pool => $glance_rbd_store_pool,
     require        => Class['quickstack::db::mysql'],
     amqp_host      => $amqp_host,
+    amqp_hosts     => $amqp_hosts,
     amqp_port      => $amqp_port,
     amqp_username  => $amqp_username,
     amqp_password  => $amqp_password,
@@ -276,7 +279,11 @@ class quickstack::controller_common (
     image_service      => 'nova.image.glance.GlanceImageService',
     glance_api_servers => "http://${controller_priv_host}:9292/v1",
     rpc_backend        => amqp_backend('nova', $amqp_provider),
-    qpid_hostname      => $amqp_host,
+    if amqp_hosts {
+      qpid_hostname    => $amqp_hosts,
+    } else {
+      qpid_hostname    => $amqp_host,
+    }
     qpid_username      => $amqp_username,
     qpid_password      => $amqp_password,
     rabbit_host        => $amqp_host,

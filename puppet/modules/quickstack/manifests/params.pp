@@ -123,6 +123,7 @@ class quickstack::params (
   $mysql_host                    = '172.16.0.1',
   $amqp_provider                 = 'rabbitmq',
   $amqp_host                     = '172.16.0.1',
+  $amqp_hosts                    = undef,
   $amqp_username                 = 'openstack',
   $amqp_password                 = 'CHANGEME',
   $enable_ovs_agent              = 'true',

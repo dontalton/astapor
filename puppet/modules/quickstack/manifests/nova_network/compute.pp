@@ -38,6 +38,7 @@ class quickstack::nova_network::compute (
   $network_floating_range       = '10.0.1.0/24',
   $amqp_provider                = $quickstack::params::amqp_provider,
   $amqp_host                    = $quickstack::params::amqp_host,
+  $amqp_hosts                   = $quickstack::params::amqp_hosts,
   $amqp_port                    = '5672',
   $amqp_ssl_port                = '5671',
   $amqp_username                = $quickstack::params::amqp_username,
@@ -115,7 +116,12 @@ class quickstack::nova_network::compute (
     nova_host                    => $nova_host,
     nova_user_password           => $nova_user_password,
     amqp_provider                => $amqp_provider,
-    amqp_host                    => $amqp_host,
+    if amqp_hosts {
+      amqp_host                  => undef,
+      amqp_hosts                 => $amqp_hosts,
+    } else {
+      amqp_host                    => $amqp_host,
+    }
     amqp_port                    => $amqp_port,
     amqp_ssl_port                => $amqp_ssl_port,
     amqp_username                => $amqp_username,

@@ -26,6 +26,7 @@ class quickstack::storage_backend::cinder(
   $mysql_host                  = $quickstack::params::mysql_host,
   $amqp_provider               = $quickstack::params::amqp_provider,
   $amqp_host                   = $quickstack::params::amqp_host,
+  $amqp_hosts                  = $quickstack::params::amqp_hosts,
   $amqp_username               = $quickstack::params::amqp_username,
   $amqp_password               = $quickstack::params::amqp_password,
   $verbose                     = $quickstack::params::verbose,

@@ -9,6 +9,7 @@
 class quickstack::compute_common (
   $admin_password               = $quickstack::params::admin_password,
   $amqp_host                    = $quickstack::params::amqp_host,
+  $amqp_hosts                   = $quickstack::params::amqp_hosts,
   $amqp_password                = $quickstack::params::amqp_password,
   $amqp_port                    = '5672',
   $amqp_provider                = $quickstack::params::amqp_provider,
@@ -166,6 +167,7 @@ class quickstack::compute_common (
     qpid_username      => $amqp_username,
     qpid_password      => $amqp_password,
     rabbit_host        => $amqp_host,
+    rabbit_hosts       => undef,
     rabbit_port        => $real_amqp_port,
     rabbit_userid      => $amqp_username,
     rabbit_password    => $amqp_password,
@@ -202,6 +204,7 @@ class quickstack::compute_common (
       qpid_username   => $amqp_username,
       qpid_password   => $amqp_password,
       rabbit_host     => $amqp_host,
+      rabbit_hosts    => $amqp_hosts,
       rabbit_port     => $real_amqp_port,
       rabbit_userid   => $amqp_username,
       rabbit_password => $amqp_password,

@@ -1,6 +1,7 @@
 class quickstack::amqp::server::rabbitmq (
   $amqp_provider                 = $quickstack::params::amqp_provider,
   $amqp_host                     = $quickstack::params::amqp_host,
+  $amqp_hosts                    = $quickstack::params::amqp_hosts,
   $amqp_port                     = $quickstack::params::amqp_port,
   $amqp_username                 = $quickstack::params::amqp_username,
   $amqp_password                 = $quickstack::params::amqp_password,
